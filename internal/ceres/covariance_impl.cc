@@ -628,9 +628,9 @@ bool CovarianceImpl::ComputeCovarianceValuesUsingSuiteSparseQR() {
   // more efficient, both in runtime as well as the quality of
   // ordering computed. So, it maybe worth doing that analysis
   // separately.
-  const SuiteSparse_long rank = SuiteSparseQR<double>(SPQR_ORDERING_BESTAMD,
-                                                      SPQR_DEFAULT_TOL,
-                                                      cholmod_jacobian.ncol,
+  const SuiteSparse_long rank = SuiteSparseQR<double, SuiteSparse_long>(SPQR_ORDERING_BESTAMD,
+                                                      double(SPQR_DEFAULT_TOL),
+                                                      int(cholmod_jacobian.ncol),
                                                       &cholmod_jacobian,
                                                       &R,
                                                       &permutation,

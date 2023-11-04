@@ -90,7 +90,17 @@ if (NOT CXSparse_NO_CMAKE)
 endif (NOT CXSparse_NO_CMAKE)
 
 if (CXSparse_FOUND)
-  return ()
+  if (NOT TARGET CXSparse::CXSparse)
+    if (TARGET SuiteSparse::CXSparse)
+      add_library(CXSparse::CXSparse ALIAS SuiteSparse::CXSparse)
+    endif()
+  endif()
+  if (NOT TARGET SuiteSparse::SuiteSparseConfig)
+    if (TARGET SuiteSparse::Config)
+      add_library(SuiteSparse::SuiteSparseConfig ALIAS SuiteSparse::Config)
+  endif()
+endif()
+return ()
 endif (CXSparse_FOUND)
 
 # Reset CALLERS_CMAKE_FIND_LIBRARY_PREFIXES to its value when
